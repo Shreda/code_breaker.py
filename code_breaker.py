@@ -19,19 +19,19 @@ Welcome to code_breaker.py. Lets see if you can guess my 3 digit number!
 Code has been generated, please guess a 3 digit number.
 '''
 )
-	
+
 def generate_code():
 	secret_code_list = random.sample(range(0,9+1), 3)
 	secret_code = list_to_string(secret_code_list)	
 	return secret_code
 
 def get_clue(user_guess, secret_code):
+	if user_guess == secret_code:
+		print("\nyou have broken my secret code!!")
+		return True
+		
 	output = "The hint for your guess is: {}"
 	for i in range(len(user_guess)):
-		if user_guess == secret_code:
-			print("\nyou have broken my secret code!!")
-			return True
-
 		if user_guess[i] == secret_code[i]:
 			print(output.format('Match\n'))
 			return False
