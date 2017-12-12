@@ -19,15 +19,28 @@ Welcome to code_breaker.py. Lets see if you can guess my 3 digit number!
 Code has been generated, please guess a 3 digit number.
 '''
 )
+def generate_code():
+	secret_code_list = random.sample(range(0,9+1), 3)
+	secret_code = list_to_string(secret_code_list)	
+	return secret_code
 
 def get_clue(user_guess, secret_code):
 	output = "The hint for your guess is: {}"
 	for i in range(len(user_guess)):
+		if user_guess == secret_code:
+			print("\nyou have broken my secret code!!")
+			return True
+
 		if user_guess[i] == secret_code[i]:
-			return output.format('Match\n')
+			print(output.format('Match\n'))
+			return False
+
 		elif user_guess[i] in secret_code:
-			return output.format('Close\n')
-	return output.format('None\n')
+			print(output.format('Close\n'))
+			return False
+
+	print(output.format('None\n'))
+	return False
 
 def list_to_string(a_list):
 	'''Returns string form of list
@@ -41,22 +54,15 @@ def list_to_string(a_list):
 
 def main():
 	welcome()
-	# Generates 3 random numbers which are different from one another
-	secret_code_list = random.sample(range(0,9+1), 3)
-	secret_code = list_to_string(secret_code_list)
-	# print(secret_code) use this to reveal secret code for debugging
-	user_guess = ''
-	while True:
+	secret_code = generate_code()
+	code_guessed = False
+	
+	while not code_guessed:
 	 	user_guess = input('What is your guess? ')
-	 	if user_guess == secret_code:
-	 		print("\nyou have broken my secret code!!")
-	 		break
 	 	if len(user_guess) != 3 or type(int(user_guess)) != type(10):
 	 		print('invalid input')
-
 	 	else:
-	 		clue = get_clue(user_guess, secret_code)
-	 		print(clue)
+	 		code_guessed = get_clue(user_guess, secret_code)
 
 
 if __name__ == '__main__':
