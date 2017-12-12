@@ -19,6 +19,7 @@ Welcome to code_breaker.py. Lets see if you can guess my 3 digit number!
 Code has been generated, please guess a 3 digit number.
 '''
 )
+	
 def generate_code():
 	secret_code_list = random.sample(range(0,9+1), 3)
 	secret_code = list_to_string(secret_code_list)	
@@ -56,7 +57,7 @@ def main():
 	welcome()
 	secret_code = generate_code()
 	code_guessed = False
-	
+
 	while not code_guessed:
 	 	user_guess = input('What is your guess? ')
 	 	if len(user_guess) != 3 or type(int(user_guess)) != type(10):
